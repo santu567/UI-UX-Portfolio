@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-deep: #0a0a0f;
+  --color-bg-navy: #0d0d1a;
+  --color-violet-glow: #7c3aed;
+  --color-cyan-glow: #06b6d4;
+  --color-magenta-glow: #ec4899;
+
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+  --font-fira: "Fira Code", monospace;
+}
+
+/* Global resets and scrollbar customization */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #0a0a0f;
+  color: #f3f4f6;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+/* Custom Webkit scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.3); /* Violet glow tint */
+  border-radius: 9999px;
+  border: 2px solid #0a0a0f;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.6); /* Cyan glow hover tint */
+}
+
+/* Noise overlay for depth */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  content: "";
+  opacity: 0.04;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Cursors - Hide original cursor when active on desktop */
+@media (min-width: 1025px) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active select,
+  body.custom-cursor-active [role="button"] {
+    cursor: none;
+  }
+}
+
+.custom-cursor-blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #06b6d4;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  box-shadow: 0 0 15px #06b6d4, 0 0 30px #7c3aed;
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.3s ease;
+  will-change: transform, width, height;
+}
+
+.custom-cursor-blob.hovered {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(236, 72, 153, 0.3); /* Magenta highlight */
+  border: 2px solid #ec4899;
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+}
+
+/* Glassmorphism card utilities */
+.glass-card {
+  background: rgba(13, 13, 26, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glass-card:hover {
+  border-color: rgba(6, 182, 212, 0.3); /* Neon Cyan highlight */
+  box-shadow: 0 12px 40px 0 rgba(6, 182, 212, 0.15);
+}
+
+/* Glowing background blobs */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+@keyframes cycleColors {
+  0%, 100% {
+    filter: blur(80px) hue-rotate(0deg);
+  }
+  50% {
+    filter: blur(80px) hue-rotate(180deg);
+  }
+}
+
+.glow-orb-animated {
+  animation: cycleColors 20s ease-in-out infinite;
+}
+
+/* Retro 8-bit / Minecraft typography styling */
+.text-retro-8bit {
+  font-family: "Press Start 2P", monospace;
+  color: #06b6d4; /* Neon Cyan */
+  text-shadow: 
+    3px 3px 0px #ec4899, /* Hot Magenta block shadow */
+    6px 6px 0px #0a0a0f; /* Background shadow */
+  letter-spacing: -0.04em;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+/* Custom 3D Card tilt container */
+.tilt-card-wrap {
+  perspective: 1000px;
+}
+
+.tilt-card {
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+}
+
+.tilt-card-content {
+  transform: translateZ(30px);
+}
+
+/* Bento grid flip card animation */
+.flip-card-inner {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Navigation Draw from Center Outward Animation */
+.nav-link-draw {
+  position: relative;
+}
+
+.nav-link-draw::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  background: linear-gradient(90deg, #7c3aed, #06b6d4, #ec4899);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link-draw:hover::after {
+  width: 100%;
+}
+
+/* Liquid/Blob CTA Button fill styles */
+.btn-liquid {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-liquid .liquid {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, #7c3aed, #ec4899);
+  box-shadow: 0 0 50px rgba(124, 58, 237, 0.5);
+  transition: all 0.5s ease;
+  border-radius: 40%;
+  z-index: -1;
+  transform: translateY(150px) rotate(0deg);
+}
+
+.btn-liquid:hover .liquid {
+  transform: translateY(-40px) rotate(360deg);
+}
+
+/* Infinite testimonial marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar utility for marquee / container */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Matrix style background for easter egg */
+.matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(10, 10, 15, 0.95);
+  pointer-events: all;
+}
