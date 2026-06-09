@@ -358,7 +358,7 @@ export default function App() {
       title: "gramAI",
       category: "SOFTWARE & UI/UX DESIGN",
       year: "2025",
-      image: "/gramai_hero.png",
+      image: import.meta.env.BASE_URL + "gramai_hero.png",
       description: "An Instagram Auto DM automation SaaS dashboard designed to streamline marketing funnels, auto-trigger campaign triggers, and manage interactive message sequences.",
       role: "Lead Developer & UI/UX",
       tools: ["Figma", "SaaS Architecture", "Interaction Design", "User Flow"],
@@ -376,7 +376,7 @@ export default function App() {
       title: "Hiring Platform",
       category: "UI/UX DESIGN",
       year: "2025",
-      image: "/hiring_hero.png",
+      image: import.meta.env.BASE_URL + "hiring_hero.png",
       description: "An end-to-end recruitment solution focusing on candidate tracking optimization, interview scheduling, and creating a modern, frictionless applicant experience.",
       role: "Personal Project",
       tools: ["Figma", "User Research", "Wireframing", "Prototyping"],
@@ -394,7 +394,7 @@ export default function App() {
       title: "DWLR Anomalous Data System",
       category: "SOFTWARE DESIGN",
       year: "2025",
-      image: "/dwlr_hero.png",
+      image: import.meta.env.BASE_URL + "dwlr_hero.png",
       description: "A comprehensive application designed for telemetry data analysis of Digital Water Level Recorders (DWLR). Features include detecting anomalous values, flagging faulty devices, and structuring real-time alarm interfaces.",
       role: "Personal Project",
       tools: ["Figma", "Data Visualization", "Dashboard Design", "Analytics"],
@@ -844,7 +844,7 @@ export default function App() {
               {/* Profile Image container inside glowing ring */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cyan-glow p-2 bg-bg-navy/80 backdrop-blur-md">
                 <img 
-                  src="/santu_portrait.png" 
+                  src={import.meta.env.BASE_URL + "MY_PHOTO.png"}
                   alt="Santu Manna Portrait" 
                   className="w-full h-full object-cover rounded-full group-hover:scale-110 duration-700 transition-transform filter brightness-95 contrast-105"
                 />
